@@ -22,7 +22,7 @@
   
   <ItemGroup>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\SharedDlls\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\LootValue\Shared\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="Comfort">
       <HintPath>..\SharedDlls\Comfort.dll</HintPath>
@@ -36,6 +36,6 @@
   </ItemGroup>
   
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy /y /r /i &quot;$(SolutionDir)bin\$(ConfigurationName)\net472\HealingAutoCancel.dll&quot; &quot;I:\Pelit\EFT SPT 3.9.0\BepInEx\plugins\&quot;" />
+    <Exec Command="xcopy /y /r /i &quot;$(SolutionDir)bin\$(ConfigurationName)\net472\HealingAutoCancel.dll&quot; &quot;I:\Pelit\EFT SPT 3.10\BepInEx\plugins\&quot;&#xD;&#xA;xcopy /y /r /i &quot;$(SolutionDir)bin\$(ConfigurationName)\net472\HealingAutoCancel.dll&quot; &quot;I:\Koodaus\SPT-AKI\C#\ImprovedSelfcare\Releases\BepInEx\plugins\&quot;" />
   </Target>
 </Project>
