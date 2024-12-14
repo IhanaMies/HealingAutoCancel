@@ -58,7 +58,7 @@ namespace ImprovedSelfcare
 			if (damageInfo.DamageType != EDamageType.Medicine)
 				return;
 
-			MedsItemClass medkitInHands = Globals.player.TryGetItemInHands<MedsItemClass>();
+			MedsItemClass medkitInHands = Globals.player.TryGetItemInHands<MedsItemClass>();			
 
 			//Try to ignore any healing done by stims and ensure we do not try to cancel fixing a broken limb
 			if (medkitInHands != null && !Globals.activeHealthController.IsBodyPartBroken(bodyPart))
@@ -76,7 +76,7 @@ namespace ImprovedSelfcare
 
 				if ((bodyPartHealth.AtMaximum && !bleeding) || healingItemDepleted)
 					//This is the magical part! Woooaahh
-					Globals.activeHealthController.CancelApplyingItem();
+					Globals.activeHealthController.RemoveMedEffect();
 			}
 		}
 	}
