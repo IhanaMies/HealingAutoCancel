@@ -134,3 +134,5 @@ _NCrunch*
 
 Releases/
 .vs/
+/Build/BepInEx/plugins
+README.md

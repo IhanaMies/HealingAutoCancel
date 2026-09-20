@@ -1,12 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>HealingAutoCancel</AssemblyName>
     <Description>Makes healing less dumb</Description>
-    <Version>1.0.0</Version>
+    <Version>1.1.0</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,27 +16,29 @@
     <PackageReference Include="BepInEx.PluginInfoProps" Version="1.*" />
     <PackageReference Include="UnityEngine.Modules" Version="5.6.0" IncludeAssets="compile" />
   </ItemGroup>
-  
-  <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
-  </ItemGroup>
-  
+
   <ItemGroup>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\LootValue\Shared\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\EscapeFromTarkov_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="Comfort">
-      <HintPath>..\SharedDlls\Comfort.dll</HintPath>
-    </Reference>
-    <Reference Include="spt-reflection">
-      <HintPath>..\SharedDlls\spt-reflection.dll</HintPath>
+      <HintPath>..\..\EscapeFromTarkov_Data\Managed\Comfort.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\SharedDlls\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>..\..\EscapeFromTarkov_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <!-- 4.1 moved SPT's own client-support DLLs out of a "Core" folder and into BepInEx\plugins\spt -->
+    <Reference Include="spt-reflection">
+      <HintPath>..\..\BepInEx\plugins\spt\spt-reflection.dll</HintPath>
+    </Reference>
+    <!-- new in 4.1: spt-reflection now depends on spt-common, so it has to be referenced directly too -->
+    <Reference Include="spt-common">
+      <HintPath>..\..\BepInEx\plugins\spt\spt-common.dll</HintPath>
     </Reference>
   </ItemGroup>
-  
+
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy /y /r /i &quot;$(SolutionDir)bin\$(ConfigurationName)\net472\HealingAutoCancel.dll&quot; &quot;I:\Pelit\EFT SPT 3.10\BepInEx\plugins\&quot;&#xD;&#xA;xcopy /y /r /i &quot;$(SolutionDir)bin\$(ConfigurationName)\net472\HealingAutoCancel.dll&quot; &quot;I:\Koodaus\SPT-AKI\C#\ImprovedSelfcare\Releases\BepInEx\plugins\&quot;" />
+    <Exec Command="copy &quot;$(TargetPath)&quot; &quot;$(ProjectDir)..\..\BepInEx\plugins\$(TargetFileName)&quot;" />
   </Target>
+
 </Project>
